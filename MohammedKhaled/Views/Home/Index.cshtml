@@ -1,0 +1,259 @@
+﻿@model MohammedKhaled.Models.Employee
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@if (Model==null)
+{
+        <div class="text-center">
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <h1 class="display-6">Login</h1>
+   <form action="../Home/login" class="col-12">
+    <input type="submit" value="Login"  class="btn btn-primary" />
+</form>
+    </div>
+
+
+
+
+
+}
+else if(Model.admin==false)
+{
+
+    @if (Model.State == 0)
+    {
+        
+    
+    <div class="text-center">
+    <h1 class="display-4">Welcome @Model.Name</h1>
+  <h1>
+       @DateTime.Now
+  </h1>  
+    <div  style="border-style: solid ; border-width: 1px; height:500px; width:400px; position:absolute; left:30% ; top:20%  ">
+
+         <h1> Check in </h1>
+          @if((DateTime.Now >= DateTime.Parse("7:00:00.00")) && (DateTime.Now < DateTime.Parse("8:30:00.00")) )
+            {
+                <br />
+               <h1 style="color:green"> On Time </h1>
+                <br /> <br /> 
+                <form asp-controller="Attendances" asp-action="Create"  asp-route-id="@Model.Id" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group ">
+         
+           <br /> <br />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Check in" class="btn btn-primary" />
+            </div>
+        </form>
+
+
+            }
+            else if((DateTime.Now > DateTime.Parse("8:30:00.00")) && (DateTime.Now < DateTime.Parse("12:00:00.00")) )
+            {
+                <br />
+               <h1 style="color:orange"> Late </h1>
+                <br /> <br /> 
+                <form asp-controller="attends" asp-action="checkIN" asp-route-id="@Model.Id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group ">
+                <label name="InReason"  class="control-label">Write the reason of late</label>
+                <input name="InReason"  class="form-control" style="height:100px ; top:200px;" />
+           <br /> <br />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Check in" class="btn btn-primary" />
+            </div>
+        </form>
+
+            }
+            else 
+            {
+                <br />
+               <h1 style="color:red"> Absent </h1>
+                <br /> <br /> 
+                <form asp-controller="attends" asp-action="checkIN" asp-route-id="@Model.Id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group ">
+                <label name="InReason"  class="control-label">Write the reason of late</label>
+                <input name="InReason"  class="form-control" style="height:100px ; top:200px;" />
+                 
+           <br /> <br />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Check in" class="btn btn-primary" />
+            </div>
+        </form>
+
+
+            }
+          
+
+
+        </div>
+     <div style="border-style: solid ; border-width: 1px; height:500px; width:400px; position:absolute; left:50% ; top:20% ">
+
+        
+         <h1> Check out </h1>
+         <h1 style="color:gray"> You need to check in first </h1>
+    </div>
+
+        </div>
+
+         <form asp-controller="attends" asp-action="Attendances"  asp-route-id="@Model.Id"  >
+  <div style="position:absolute; left:45%; top:60%" >
+
+  
+    <input type="submit" value="My Attendances" class="btn btn-primary" />
+    </div>
+</form>
+
+    }
+    else if (Model.State == 1)
+    {
+         <div class="text-center">
+    <h1 class="display-4">Welcome @Model.Name</h1>
+  <h1>
+       @DateTime.Now
+  </h1>  
+    <div  style="border-style: solid ; border-width: 1px; height:500px; width:400px; position:absolute; left:30% ; top:20%  ">
+
+         <h1> Check in </h1>
+         <br>
+         <h1 style="color:green"> checked in </h1>
+        </div>
+        </div>
+
+        <div style="border-style: solid ; border-width: 1px; height:500px; width:400px; position:absolute; left:50% ; top:20% ">
+
+        
+         <h1 style=" text-align:center"> Check out </h1>
+
+        @if((DateTime.Now > DateTime.Parse("15:00:00.00"))  )
+            {
+
+                  <br />
+               <h1 style="color:green ; text-align:center"> On Time </h1>
+                <br /> <br /> 
+                <form asp-controller="attends" asp-action="checkOut"  asp-route-id="@Model.Id" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group ">
+            
+           <br /> <br />
+            </div>
+            <div class="form-group" style="position:absolute; left:40%">
+                <input type="submit" value="Check in" class="btn btn-primary"  />
+            </div>
+        </form>
+
+
+            }
+               @if((DateTime.Now <= DateTime.Parse("15:00:00.00"))  )
+            {
+
+                  <br />
+               <h1 style="color:orange ; text-align:center"> Early </h1>
+                <br /> <br /> 
+                <form asp-controller="attends" asp-action="checkOut"  asp-route-id="@Model.Id" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group ">
+                   <label name="InReason"  class="control-label">Write the reason </label>
+                <input name="InReason"  class="form-control" style="height:100px ; top:200px;" />
+            
+           <br /> <br />
+            </div>
+            <div class="form-group" style="position:absolute; left:40%">
+
+                <input type="submit" value="Check in" class="btn btn-primary"  />
+            </div>
+        </form>
+
+
+            }
+
+
+
+            </div>
+             <form asp-controller="attends" asp-action="Attendances"  asp-route-id="@Model.Id"  >
+  <div style="position:absolute; left:47%; top:60%" >
+
+  
+    <input type="submit" value="My Attendances"  class="btn btn-primary" />
+    </div>
+</form>
+    }
+
+
+     else if (Model.State == 2)
+    {
+        
+         <div class="text-center">
+    <h1 class="display-4">Welcome @Model.Name</h1>
+  <h1>
+       @DateTime.Now
+  </h1>  
+
+  <br><br>
+
+
+  <h1 style="color:green">
+       Your attendance for this day has been successfully received
+  </h1>  
+   <form asp-controller="attends" asp-action="Attendances"  asp-route-id="@Model.Id"  >
+  <div style="position:absolute; left:45%; top:30%" >
+
+  
+    <input type="submit" value="My Attendances"  class="btn btn-primary" />
+    </div>
+</form>
+
+  </div>
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+else if(Model.admin==true)
+{
+<div class="text-center">
+    <h1 class="display-4">Welcome @Model.Name</h1>
+
+   <div class="col-15" style="position:absolute; left:40% ; top:30% " >
+   <form action="../Employees/Index" >
+    <input type="submit"  class="btn btn-primary" value="Employee Management" style="height:100px;  "/>
+</form>
+</div>
+
+<div class="col-15" style="position:absolute; left:50% ; top:30% " >
+   <form action="../attends">
+    <input type="submit" class="btn btn-primary"  value="View attendance "style="height:100px; "/>
+</form>
+</div>
+</div>
+
+    
+}
+
+
+
+
+
+
+

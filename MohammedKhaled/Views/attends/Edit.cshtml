@@ -1,0 +1,74 @@
+﻿@model MohammedKhaled.Models.attend
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>attend</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Tnow" class="control-label"></label>
+                <input asp-for="Tnow" class="form-control" />
+                <span asp-validation-for="Tnow" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="AId" />
+            <div class="form-group">
+                <label asp-for="EmpId" class="control-label"></label>
+                <input asp-for="EmpId" class="form-control" />
+                <span asp-validation-for="EmpId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CheckIn" /> @Html.DisplayNameFor(model => model.CheckIn)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CheckOut" /> @Html.DisplayNameFor(model => model.CheckOut)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="InState" class="control-label"></label>
+                <input asp-for="InState" class="form-control" />
+                <span asp-validation-for="InState" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="outState" class="control-label"></label>
+                <input asp-for="outState" class="form-control" />
+                <span asp-validation-for="outState" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InReason" class="control-label"></label>
+                <input asp-for="InReason" class="form-control" />
+                <span asp-validation-for="InReason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OutReason" class="control-label"></label>
+                <input asp-for="OutReason" class="form-control" />
+                <span asp-validation-for="OutReason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

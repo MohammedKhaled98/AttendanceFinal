@@ -1,0 +1,83 @@
+﻿@model IEnumerable<MohammedKhaled.Models.attend>
+@{
+    ViewData["Title"] = "Attendances";
+   
+}
+
+
+
+<h1>My Attendaces</h1>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+             <th>
+                Check In Date
+            </th>
+             <th>
+                Check Out Date
+            </th>
+            <th>
+                Check In
+            </th>
+            <th>
+               Check out
+            </th>
+            <th>
+                State In
+            </th>
+            <th>
+                Reason of Late
+            </th>
+            <th>
+                State Out
+            </th>
+            <th>
+                Reason of out early 
+            </th>
+            <th>
+                Hours in this day
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            
+             <td>
+                @Html.DisplayFor(modelItem => item.Tin)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Tout)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.CheckIn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckOut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InReason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.outState)
+            </td>
+               <td>
+                @Html.DisplayFor(modelItem => item.OutReason)
+            </td>
+               <td>
+                @Html.DisplayFor(modelItem => item.WHours)
+            </td>
+       
+        </tr>
+}
+    </tbody>
+</table>
+
+
